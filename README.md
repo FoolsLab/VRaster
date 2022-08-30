@@ -8,32 +8,29 @@ A simple VR app framework written in c++.
 - C++ environment, any of the following:
     - MSVC / Microsoft Visual Studio 
     - gcc / GNU make
-- CMake (>=3.24)
-- vcpkg
-- Vulkan SDK
+- CMake (>=3.24, recommended)
+- [Vulkan SDK](https://vulkan.lunarg.com/sdk/home)
+    - `VULKAN_SDK` environment variable must be set.
+- [vcpkg](https://github.com/microsoft/vcpkg)
 
 ### vcpkg packages
 
-- libsndfile
-- openal-soft
-- glm
-- tinygltf
-- vulkan-hpp
-- openxr-loader
+These packages are required to install.
+
+- `libsndfile`
+- `openal-soft`
+- `glm`
+- `tinygltf`
+- `vulkan`
+- `vulkan-hpp`
+- `openxr-loader[vulkan]`
 
 ## Install
 
 ```sh
 mkdir build
 cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=(install path)
-cmake --build . --config Release
-cmake --install .
-```
-```bat
-mkdir build
-cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=(install path)
+cmake .. -DCMAKE_TOOLCHAIN_FILE=(vcpkg root path)/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=(install path)
 cmake --build . --config Release
 cmake --install .
 ```
