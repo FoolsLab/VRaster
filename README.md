@@ -13,7 +13,13 @@ A simple VR app framework written in c++.
 - Vulkan SDK
 - OpenXR
 - OpenXR-Hpp
-- OpenAL
+
+### vcpkg packages
+
+- libsndfile
+- openal-soft
+- glm
+- tinygltf
 
 ## Install
 
@@ -31,5 +37,3 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%/scripts/buildsystems/vcpkg.cmake -D
 cmake --build . --config Release
 cmake --install .
 ```
-
-
