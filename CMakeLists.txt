@@ -4,7 +4,16 @@ project(libVRaster)
 
 message("Build Type: ${CMAKE_BUILD_TYPE}")
 
-add_library(VRaster src/main.cpp)
+add_library(VRaster 
+    src/main.cpp
+    src/xr_process.cpp
+    src/GraphicsManager_Vulkan.cpp
+    src/libimpl.cpp
+)
+target_include_directories(VRaster PRIVATE include)
+
+target_compile_features(VRaster PUBLIC cxx_std_20)
+target_compile_definitions(VRaster PUBLIC XR_USE_GRAPHICS_API_VULKAN)
 
 set_target_properties(VRaster PROPERTIES
     PUBLIC_HEADER include/VRaster.h
@@ -41,6 +50,7 @@ target_link_libraries(VRaster PRIVATE OpenXR::headers OpenXR::openxr_loader)
 # test
 add_executable(VRaster-test-empty src/test/test_empty.cpp)
 target_link_libraries(VRaster-test-empty VRaster)
+target_include_directories(VRaster-test-empty PRIVATE include)
 
 # install
 install(TARGETS VRaster
