@@ -32,7 +32,11 @@ target_include_directories(VRaster PRIVATE ${Vulkan_INCLUDE_DIRS})
 target_link_libraries(VRaster PRIVATE ${Vulkan_LIBRARIES})
 
 find_path(VULKAN_HPP_INCLUDE_DIRS "vulkan/vulkan.hpp")
-target_include_directories(main PRIVATE ${VULKAN_HPP_INCLUDE_DIRS})
+target_include_directories(VRaster PRIVATE ${VULKAN_HPP_INCLUDE_DIRS})
+
+# OpenXR
+find_package(OpenXR CONFIG REQUIRED)
+target_link_libraries(VRaster PRIVATE OpenXR::headers OpenXR::openxr_loader)
 
 # install
 install(TARGETS VRaster
