@@ -1,5 +1,5 @@
-
 #include <iostream>
+#include <fmt/core.h>
 
 #define XR_NULL_ASYNC_REQUEST_ID_FB 0
 
@@ -58,7 +58,7 @@ class VulkanManager : public IGraphicsManager {
     void CreateInstance(xr::Instance xrInstance, xr::SystemId systemId) {
         auto graphicsRequirements = xrInstance.getVulkanGraphicsRequirements2KHR(systemId, xr::DispatchLoaderDynamic{ xrInstance });
 
-        std::cout << std::format("Required Vulkan Version: {} ~ {}", to_string(graphicsRequirements.minApiVersionSupported), to_string(graphicsRequirements.maxApiVersionSupported)) << std::endl;
+        std::cout << fmt::format("Required Vulkan Version: {} ~ {}", to_string(graphicsRequirements.minApiVersionSupported), to_string(graphicsRequirements.maxApiVersionSupported)) << std::endl;
 
         std::vector<const char*> exts = { "VK_EXT_debug_report" };
         std::vector<const char*> layers = { "VK_LAYER_KHRONOS_validation" };
@@ -90,7 +90,7 @@ class VulkanManager : public IGraphicsManager {
 
         xrInstance.createVulkanInstanceKHR(xrCreateInfo, &tmpInst, &vkResult, xr::DispatchLoaderDynamic{ xrInstance });
         if (vkResult != VK_SUCCESS)
-            throw std::runtime_error(std::format("Vulkan Instance Creation Error(Vk): {}", to_string(vk::Result(vkResult))));
+            throw std::runtime_error(fmt::format("Vulkan Instance Creation Error(Vk): {}", to_string(vk::Result(vkResult))));
 
         this->instance = tmpInst;
     }
@@ -103,16 +103,16 @@ class VulkanManager : public IGraphicsManager {
         this->physicalDevice = xrInstance.getVulkanGraphicsDevice2KHR(getInfo, xr::DispatchLoaderDynamic{ xrInstance });
 
         auto prop = physicalDevice.getProperties();
-        std::cout << std::format("Selected Device: {} (ID:{}) Type: {}", prop.deviceName, prop.deviceID, to_string(prop.deviceType)) << std::endl;
-        std::cout << std::format("ApiVersion: {}, DriverVersion: {}", getVkVersionString(prop.apiVersion), getVkVersionString(prop.driverVersion)) << std::endl;
-        std::cout << std::format("maxSamplerAnisotropy: {}", prop.limits.maxSamplerAnisotropy) << std::endl;
+        std::cout << fmt::format("Selected Device: {} (ID:{}) Type: {}", prop.deviceName, prop.deviceID, to_string(prop.deviceType)) << std::endl;
+        std::cout << fmt::format("ApiVersion: {}, DriverVersion: {}", getVkVersionString(prop.apiVersion), getVkVersionString(prop.driverVersion)) << std::endl;
+        std::cout << fmt::format("maxSamplerAnisotropy: {}", prop.limits.maxSamplerAnisotropy) << std::endl;
     }
 
     void PrepareQueue() {
         auto queueFamilies = physicalDevice.getQueueFamilyProperties();
         auto queueFamilies2 = physicalDevice.getQueueFamilyProperties2();
         for (uint32_t i = 0; i < queueFamilies.size(); i++) {
-            std::cout << std::format("QueueFamily {}: queue x{}, Graphics:{}, Transfer:{}, Compute:{}, Protected:{}, SparceBind:{}",
+            std::cout << fmt::format("QueueFamily {}: queue x{}, Graphics:{}, Transfer:{}, Compute:{}, Protected:{}, SparceBind:{}",
                 i, queueFamilies[i].queueCount,
                 bool(queueFamilies[i].queueFlags & vk::QueueFlagBits::eGraphics),
                 bool(queueFamilies[i].queueFlags & vk::QueueFlagBits::eTransfer),
@@ -163,7 +163,7 @@ class VulkanManager : public IGraphicsManager {
         VkResult vkResult;
         xrInstance.createVulkanDeviceKHR(xrCreateInfo, &tmpDevice, &vkResult, xr::DispatchLoaderDynamic{ xrInstance });
         if (vkResult != VK_SUCCESS)
-            throw std::runtime_error(std::format("Vulkan Device Creation Error(Vk): {}", to_string(vk::Result(vkResult))));
+            throw std::runtime_error(fmt::format("Vulkan Device Creation Error(Vk): {}", to_string(vk::Result(vkResult))));
 
         this->device = tmpDevice;
     }

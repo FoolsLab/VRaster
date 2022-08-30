@@ -3,7 +3,7 @@
 #include <stb_image.h>
 
 inline auto getVkVersionString(uint32_t version) {
-    return std::format("{}.{}.{}", VK_VERSION_MAJOR(version), VK_VERSION_MINOR(version), VK_VERSION_PATCH(version));
+    return fmt::format("{}.{}.{}", VK_VERSION_MAJOR(version), VK_VERSION_MINOR(version), VK_VERSION_PATCH(version));
 }
 
 struct PushConstantData {
