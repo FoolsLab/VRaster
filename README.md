@@ -50,15 +50,15 @@ target_link_libraries(main VRaster)
 ```cpp
 #include <VRaster.hpp>
 
-void init() {
+void init(IGraphicsProvider& g) {
     // initializing code
 }
 
-void proc() {
+void proc(const GameData& dat){
     // main-loop processing code
 }
 
-void proc() {
+void draw(IGraphicsProvider& g) {
     // main-loop drawing code
 }
 ```

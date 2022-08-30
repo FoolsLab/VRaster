@@ -21,11 +21,11 @@ set_target_properties(VRaster PROPERTIES
 
 # OpenAL
 find_package(OpenAL CONFIG REQUIRED)
-target_link_libraries(VRaster PRIVATE OpenAL::OpenAL)
+target_link_libraries(VRaster PUBLIC OpenAL::OpenAL)
 
 # libsndfile
 find_package(SndFile CONFIG REQUIRED)
-target_link_libraries(VRaster PRIVATE SndFile::sndfile)
+target_link_libraries(VRaster PUBLIC SndFile::sndfile)
 
 # GLM
 find_package(glm CONFIG REQUIRED)
@@ -33,23 +33,23 @@ target_link_libraries(VRaster PUBLIC glm::glm)
 
 # tinygltf
 find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
-target_include_directories(VRaster PRIVATE ${TINYGLTF_INCLUDE_DIRS})
+target_include_directories(VRaster PUBLIC ${TINYGLTF_INCLUDE_DIRS})
 
 # fmt
 find_package(fmt CONFIG REQUIRED)
-target_link_libraries(VRaster PRIVATE fmt::fmt)
+target_link_libraries(VRaster PUBLIC fmt::fmt)
 
 # Vulkan
 find_package(Vulkan REQUIRED)
-target_include_directories(VRaster PRIVATE ${Vulkan_INCLUDE_DIRS})
-target_link_libraries(VRaster PRIVATE ${Vulkan_LIBRARIES})
+target_include_directories(VRaster PUBLIC ${Vulkan_INCLUDE_DIRS})
+target_link_libraries(VRaster PUBLIC ${Vulkan_LIBRARIES})
 
 find_path(VULKAN_HPP_INCLUDE_DIRS "vulkan/vulkan.hpp")
-target_include_directories(VRaster PRIVATE ${VULKAN_HPP_INCLUDE_DIRS})
+target_include_directories(VRaster PUBLIC ${VULKAN_HPP_INCLUDE_DIRS})
 
 # OpenXR
 find_package(OpenXR CONFIG REQUIRED)
-target_link_libraries(VRaster PRIVATE OpenXR::headers OpenXR::openxr_loader)
+target_link_libraries(VRaster PUBLIC OpenXR::headers OpenXR::openxr_loader)
 
 # test
 add_executable(VRaster-test-empty src/test/test_empty.cpp)
@@ -58,12 +58,12 @@ target_include_directories(VRaster-test-empty PRIVATE include)
 
 # install
 install(TARGETS VRaster
-    EXPORT VRaster-config
+    EXPORT vraster-config
     LIBRARY        DESTINATION lib
     INCLUDES       DESTINATION include
     PUBLIC_HEADER  DESTINATION include/Vraster)
 
-install(EXPORT VRaster-config
-    FILE VRaster-config.cmake
+install(EXPORT vraster-config
+    FILE vraster-config.cmake
     DESTINATION share/cmake/VRaster/
     EXPORT_LINK_INTERFACE_LIBRARIES)
