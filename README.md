@@ -4,7 +4,7 @@ A simple VR app framework written in c++.
 
 ## Prerequisites
 
-- Windows 11 (may also work on Windows 10, but not checked yet.)
+- Windows 11 (may also work on Windows 10, Ubuntu, but unconfirmed.)
 - C++ environment, any of the following:
     - MSVC / Microsoft Visual Studio 
     - gcc / GNU make
