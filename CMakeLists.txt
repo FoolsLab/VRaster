@@ -29,7 +29,7 @@ target_link_libraries(VRaster PRIVATE SndFile::sndfile)
 
 # GLM
 find_package(glm CONFIG REQUIRED)
-target_link_libraries(VRaster PRIVATE glm::glm)
+target_link_libraries(VRaster PUBLIC glm::glm)
 
 # tinygltf
 find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
