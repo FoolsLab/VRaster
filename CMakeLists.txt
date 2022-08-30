@@ -38,6 +38,10 @@ target_include_directories(VRaster PRIVATE ${VULKAN_HPP_INCLUDE_DIRS})
 find_package(OpenXR CONFIG REQUIRED)
 target_link_libraries(VRaster PRIVATE OpenXR::headers OpenXR::openxr_loader)
 
+# test
+add_executable(VRaster-test-empty src/test/test_empty.cpp)
+target_link_libraries(VRaster-test-empty VRaster)
+
 # install
 install(TARGETS VRaster
     EXPORT VRaster-config
