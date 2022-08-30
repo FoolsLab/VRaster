@@ -26,6 +26,14 @@ target_link_libraries(VRaster PRIVATE glm::glm)
 find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
 target_include_directories(VRaster PRIVATE ${TINYGLTF_INCLUDE_DIRS})
 
+# Vulkan
+find_package(Vulkan REQUIRED)
+target_include_directories(VRaster PRIVATE ${Vulkan_INCLUDE_DIRS})
+target_link_libraries(VRaster PRIVATE ${Vulkan_LIBRARIES})
+
+find_path(VULKAN_HPP_INCLUDE_DIRS "vulkan/vulkan.hpp")
+target_include_directories(main PRIVATE ${VULKAN_HPP_INCLUDE_DIRS})
+
 # install
 install(TARGETS VRaster
     EXPORT VRaster-config
