@@ -3,8 +3,10 @@
 
 #define XR_NULL_ASYNC_REQUEST_ID_FB 0
 
+#ifdef WIN32
 #include <Windows.h>
 #include <wrl/client.h>
+#endif
 
 #include <vulkan/vulkan.hpp>
 #include <openxr/openxr_platform.h>

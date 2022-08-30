@@ -149,8 +149,8 @@ class App
             exts.push_back(XR_HTCX_VIVE_TRACKER_INTERACTION_EXTENSION_NAME);
 
         xr::InstanceCreateInfo instanceCreateInfo{};
-        strcpy_s(instanceCreateInfo.applicationInfo.applicationName, "XRTest");
-        strcpy_s(instanceCreateInfo.applicationInfo.engineName, "XRTest");
+        strcpy(instanceCreateInfo.applicationInfo.applicationName, "XRTest");
+        strcpy(instanceCreateInfo.applicationInfo.engineName, "XRTest");
         instanceCreateInfo.applicationInfo.apiVersion = xr::Version::current();
         instanceCreateInfo.enabledApiLayerCount = layers.size();
         instanceCreateInfo.enabledApiLayerNames = layers.data();
@@ -620,12 +620,12 @@ class App
 
             //renderDat.track = SpaceToPose(trackerActions.space.get(), appSpace.get(), frameState.predictedDisplayTime);
 
-            gameData.dt = long double(frameState.predictedDisplayPeriod.get()) / 1'000'000'000;
+            gameData.dt = (long double)(frameState.predictedDisplayPeriod.get()) / 1'000'000'000;
 
             Game::proc(gameData);
 
-            for (uint32_t i = 0; const auto & swapchain : swapchains) {
-                const auto& swapchain = swapchains[i].handle;
+            for (uint32_t i = 0; const auto& swapchainData : swapchains) {
+                const auto& swapchain = swapchainData.handle;
 
                 xr::SwapchainImageAcquireInfo acquireInfo;
                 auto imageIndex = swapchain->acquireSwapchainImage(acquireInfo);
