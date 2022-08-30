@@ -43,7 +43,7 @@ class CommandBuffer
     std::vector<vk::UniqueFence> fences;
     uint32_t count;
 public:
-    CommandBuffer(vk::Device device, uint32_t num = 1) : fences(num) {
+    CommandBuffer(vk::Device device, uint32_t num = 1) : fences(num), count(0) {
         vk::CommandPoolCreateInfo poolCreateInfo;
         poolCreateInfo.flags = vk::CommandPoolCreateFlagBits::eResetCommandBuffer;
         cmdPool = device.createCommandPoolUnique(poolCreateInfo);
@@ -653,7 +653,7 @@ public:
         vk::ClearValue clearVal[2];
         clearVal[0].color.float32[0] = 0.05f;
         clearVal[0].color.float32[1] = 0.05f;
-        clearVal[0].color.float32[2] = 0.1f;
+        clearVal[0].color.float32[2] = 1.0f;
         clearVal[0].color.float32[3] = 1.0f;
         clearVal[1].depthStencil.depth = 1.0f;
         clearVal[1].depthStencil.stencil = 0.0f;
