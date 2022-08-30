@@ -2,12 +2,11 @@
 
 #include <iostream>
 #include <vector>
-#include <format>
+#include <fmt/core.h>
 #include <optional>
 #include <thread>
 #include <filesystem>
 #include <fstream>
-#include <format>
 #include <array>
 
 #include "Game.hpp"
@@ -17,7 +16,7 @@
 
 #include "xr_linear_helper.h"
 
-#define XR_CHK_ERR(f) if (auto result = f; XR_FAILED(result)){ throw std::runtime_error(std::format("Err: {}, {} {}", to_string(result), __LINE__, #f)); }
+#define XR_CHK_ERR(f) if (auto result = f; XR_FAILED(result)){ throw std::runtime_error(fmt::format("Err: {}, {} {}", to_string(result), __LINE__, #f)); }
 
 auto SpaceToPose(xr::Space space, xr::Space baseSpace, xr::Time time) {
     auto location = space.locateSpace(baseSpace, time);
@@ -49,7 +48,7 @@ class App
 
         std::cout << "Api Layers: " << apiLayerCnt << std::endl;
         for (const auto& apiLayer : apiLayers) {
-            std::cout << std::format("{} v{}, spec: {}", apiLayer.layerName, apiLayer.layerVersion, to_string(apiLayer.specVersion)) << std::endl;
+            std::cout << fmt::format("{} v{}, spec: {}", apiLayer.layerName, apiLayer.layerVersion, to_string(apiLayer.specVersion)) << std::endl;
         }
 
         auto extProps = xr::enumerateInstanceExtensionPropertiesToVector(nullptr);
@@ -59,7 +58,7 @@ class App
 
         std::cout << "Extensions: " << extPropCnt << std::endl;
         for (const auto& extProp : extProps) {
-            std::cout << std::format("{} v{}", extProp.extensionName, extProp.extensionVersion) << std::endl;
+            std::cout << fmt::format("{} v{}", extProp.extensionName, extProp.extensionVersion) << std::endl;
 
             if (extProp.extensionName == std::string(XR_HTCX_VIVE_TRACKER_INTERACTION_EXTENSION_NAME)) {
                 extInfo.vive_tracker = true;
@@ -163,7 +162,7 @@ class App
             throw std::runtime_error("instance creation error");
 
         auto prop = instance->getInstanceProperties();
-        std::cout << std::format("Runtime: {} v{}", prop.runtimeName, to_string(prop.runtimeVersion)) << std::endl;
+        std::cout << fmt::format("Runtime: {} v{}", prop.runtimeName, to_string(prop.runtimeVersion)) << std::endl;
     }
 
     void InitializeSystem() {
@@ -176,10 +175,10 @@ class App
 
         auto props = instance->getSystemProperties(systemId);
 
-        std::cout << std::format("SystemID: {:X}, FormFactor: {}", this->systemId.get(), to_string(sysGetInfo.formFactor)) << std::endl;
-        std::cout << std::format("SystemName: {}, vendorID: {:X}", props.systemName, props.vendorId) << std::endl;
-        std::cout << std::format("Max Layers: {}, Max Size: {}x{}", props.graphicsProperties.maxLayerCount, props.graphicsProperties.maxSwapchainImageWidth, props.graphicsProperties.maxSwapchainImageHeight) << std::endl;
-        std::cout << std::format("Tracking: position/{}, orientation/{}", props.trackingProperties.positionTracking.get(), props.trackingProperties.orientationTracking.get()) << std::endl;
+        std::cout << fmt::format("SystemID: {:X}, FormFactor: {}", this->systemId.get(), to_string(sysGetInfo.formFactor)) << std::endl;
+        std::cout << fmt::format("SystemName: {}, vendorID: {:X}", props.systemName, props.vendorId) << std::endl;
+        std::cout << fmt::format("Max Layers: {}, Max Size: {}x{}", props.graphicsProperties.maxLayerCount, props.graphicsProperties.maxSwapchainImageWidth, props.graphicsProperties.maxSwapchainImageHeight) << std::endl;
+        std::cout << fmt::format("Tracking: position/{}, orientation/{}", props.trackingProperties.positionTracking.get(), props.trackingProperties.orientationTracking.get()) << std::endl;
     }
 
     void InitializeSession() {
@@ -238,7 +237,7 @@ class App
 
         std::cout << "Avilable Swapchain Format x" << swapchainFmtCnt << std::endl;
         for (int i = 0; const auto & swapchainFmt : swapchainFmts) {
-            std::cout << std::format("{}{}{}",
+            std::cout << fmt::format("{}{}{}",
                 swapchainFmt == selectedSwapchainFmt ? "[" : "",
                 swapchainFmt,
                 swapchainFmt == selectedSwapchainFmt ? "]" : "") << std::endl;
@@ -271,10 +270,10 @@ class App
 
         for (int i = 0; const auto & configView : configViews) {
             std::cout << "View " << i << ":" << std::endl;
-            std::cout << std::format("Size: typ/{}x{}, max/{}x{}",
+            std::cout << fmt::format("Size: typ/{}x{}, max/{}x{}",
                 configView.recommendedImageRectWidth, configView.recommendedImageRectHeight,
                 configView.maxImageRectWidth, configView.maxImageRectHeight) << std::endl;
-            std::cout << std::format("Samples: typ/{}, max/{}",
+            std::cout << fmt::format("Samples: typ/{}, max/{}",
                 configView.recommendedSwapchainSampleCount, configView.maxSwapchainSampleCount) << std::endl;
 
             xr::SwapchainCreateInfo createInfo{};
@@ -492,13 +491,13 @@ class App
         case xr::Result::EventUnavailable:
             return false;
         default:
-            throw std::runtime_error(std::format("failed to poll event: {}", to_string(result)));
+            throw std::runtime_error(fmt::format("failed to poll event: {}", to_string(result)));
         }
     }
 
     void PollEvent() {
         while (PollOneEvent()) {
-            std::cout << std::format("Event: {}", to_string(this->evBuf.type)) << std::endl;
+            std::cout << fmt::format("Event: {}", to_string(this->evBuf.type)) << std::endl;
             switch (this->evBuf.type)
             {
             case xr::StructureType::EventDataSessionStateChanged:

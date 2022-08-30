@@ -21,6 +21,7 @@ These packages are required to install.
 - `openal-soft`
 - `glm`
 - `tinygltf`
+- `fmt`
 - `vulkan`
 - `vulkan-hpp`
 - `openxr-loader[vulkan]`

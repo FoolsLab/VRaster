@@ -35,6 +35,10 @@ target_link_libraries(VRaster PRIVATE glm::glm)
 find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
 target_include_directories(VRaster PRIVATE ${TINYGLTF_INCLUDE_DIRS})
 
+# fmt
+find_package(fmt CONFIG REQUIRED)
+target_link_libraries(VRaster PRIVATE fmt::fmt)
+
 # Vulkan
 find_package(Vulkan REQUIRED)
 target_include_directories(VRaster PRIVATE ${Vulkan_INCLUDE_DIRS})
