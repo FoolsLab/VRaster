@@ -16,7 +16,7 @@ target_compile_features(VRaster PUBLIC cxx_std_20)
 target_compile_definitions(VRaster PUBLIC XR_USE_GRAPHICS_API_VULKAN)
 
 set_target_properties(VRaster PROPERTIES
-    PUBLIC_HEADER "include/VRaster.hpp;include/Game.hpp;include/GraphicsProvider.hpp;include/AudioManager.hpp"
+    PUBLIC_HEADER "include/VRaster.hpp;include/Game.hpp;include/GraphicsProvider.hpp;include/AudioManager.hpp;include/SysCustomizer.hpp;include/SysCustomizer_Vulkan.hpp"
 )
 
 # OpenAL

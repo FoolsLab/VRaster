@@ -6,6 +6,8 @@
 #include <glm/gtc/quaternion.hpp>
 
 #include "GraphicsProvider.hpp"
+#include "SysCustomizer.hpp"
+#include "SysCustomizer_Vulkan.hpp"
 
 namespace Game {
 
