@@ -49,11 +49,21 @@ cmake --build . --config Release
 cmake --install .
 ```
 
-## How to use
+## Develop VR App by VRaster
 
 ### CMakeLists.txt
 
 ```cmake
+# These are required before 'target_link_libraries'.
+find_package(OpenAL CONFIG REQUIRED)
+find_package(FreeALUT CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
+find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
+find_package(fmt CONFIG REQUIRED)
+find_package(Vulkan REQUIRED)
+find_path(VULKAN_HPP_INCLUDE_DIRS "vulkan/vulkan.hpp")
+find_package(OpenXR CONFIG REQUIRED)
+
 find_package(VRaster REQUIRED)
 target_link_libraries(main VRaster)
 ```
@@ -61,7 +71,7 @@ target_link_libraries(main VRaster)
 ### C++ Code
 
 ```cpp
-#include <VRaster.hpp>
+#include <VRaster/VRaster.hpp>
 
 void init(IGraphicsProvider& g) {
     // initializing code
@@ -74,4 +84,13 @@ void proc(const GameData& dat){
 void draw(IGraphicsProvider& g) {
     // main-loop drawing code
 }
+```
+
+### Build by CMake 
+
+```sh
+mkdir build
+cd build
+cmake .. -DCMAKE_TOOLCHAIN_FILE=(vcpkg root path)/scripts/buildsystems/vcpkg.cmake -DVRaster_DIR=(install path)/share/cmake/VRaster
+cmake --build . --config Release
 ```
