@@ -230,7 +230,7 @@ void init(IGraphicsProvider& g) {
 	scoreModel[2] = g.LoadModel("assets/score30.glb");
 	scoreModel[3] = g.LoadModel("assets/score10.glb");
 	for (int i = 0; i < 10; i++) {
-		// numberModel[i] = g.LoadModel(std::string("assets/") + std::to_string(i) + std::string(".glb"));
+		numberModel[i] = g.LoadModel(std::string("assets/") + std::to_string(i) + std::string(".glb"));
 	}
 
 	alManager.emplace();
