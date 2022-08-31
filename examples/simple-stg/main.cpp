@@ -2,14 +2,11 @@
 #include <queue>
 #include <cmath>
 
+#include <VRaster/VRaster.hpp>
+
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtx/intersect.hpp>
-
-#include "AudioManager.h"
-
-#include "Game.hpp"
-#include "utils.hpp"
 
 namespace Game {
 

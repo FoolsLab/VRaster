@@ -16,7 +16,7 @@ target_compile_features(VRaster PUBLIC cxx_std_20)
 target_compile_definitions(VRaster PUBLIC XR_USE_GRAPHICS_API_VULKAN)
 
 set_target_properties(VRaster PROPERTIES
-    PUBLIC_HEADER include/VRaster.hpp
+    PUBLIC_HEADER "include/VRaster.hpp;include/Game.hpp;include/GraphicsProvider.hpp;include/AudioManager.hpp"
 )
 
 # OpenAL
@@ -61,7 +61,7 @@ install(TARGETS VRaster
     EXPORT vraster-config
     LIBRARY        DESTINATION lib
     INCLUDES       DESTINATION include
-    PUBLIC_HEADER  DESTINATION include/Vraster)
+    PUBLIC_HEADER  DESTINATION include/VRaster)
 
 install(EXPORT vraster-config
     FILE vraster-config.cmake

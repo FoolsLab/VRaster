@@ -3,6 +3,7 @@
 #include <AL/alut.h>
 #include <AL/alext.h>
 #include <set>
+#include <iostream>
 #include "Game.hpp"
 
 class SoundEffect {
