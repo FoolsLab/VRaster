@@ -197,7 +197,7 @@ struct boomEffect {
 	bool alive = true;
 	boomEffect(glm::vec3 pos) : pos(pos) {
 		float angle = float(rand() % 10000) / 5000 * pi;
-		vel = 3.0f * (upperVec * sin(angle) + rightVec * cos(angle));
+		vel = 3.0f * (upperVec * std::sin(angle) + rightVec * std::cos(angle));
 	}
 	void proc(double dt) {
 		timer += dt;
@@ -230,7 +230,7 @@ void init(IGraphicsProvider& g) {
 	scoreModel[2] = g.LoadModel("assets/score30.glb");
 	scoreModel[3] = g.LoadModel("assets/score10.glb");
 	for (int i = 0; i < 10; i++) {
-		numberModel[i] = g.LoadModel(std::format("assets/{}.glb", i));
+		// numberModel[i] = g.LoadModel(std::string("assets/") + std::to_string(i) + std::string(".glb"));
 	}
 
 	alManager.emplace();
