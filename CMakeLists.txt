@@ -23,9 +23,9 @@ set_target_properties(VRaster PROPERTIES
 find_package(OpenAL CONFIG REQUIRED)
 target_link_libraries(VRaster PUBLIC OpenAL::OpenAL)
 
-# libsndfile
-find_package(SndFile CONFIG REQUIRED)
-target_link_libraries(VRaster PUBLIC SndFile::sndfile)
+# FreeALUT
+find_package(FreeALUT CONFIG REQUIRED)
+target_link_libraries(VRaster PRIVATE FreeALUT::alut)
 
 # GLM
 find_package(glm CONFIG REQUIRED)

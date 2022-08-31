@@ -4,6 +4,7 @@
 #include <AL/alext.h>
 #include <set>
 #include <iostream>
+#include <vector>
 #include "Game.hpp"
 
 class SoundEffect {

@@ -17,8 +17,8 @@ A simple VR app framework written in c++ (WIP).
 
 These packages are required to install.
 
-- `libsndfile`
 - `openal-soft`
+- `freealut`
 - `glm`
 - `tinygltf`
 - `fmt`

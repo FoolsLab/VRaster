@@ -5,7 +5,7 @@ project(VRaster-examples)
 find_package(VRaster REQUIRED)
 
 find_package(OpenAL CONFIG REQUIRED)
-find_package(SndFile CONFIG REQUIRED)
+find_package(FreeALUT CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_path(TINYGLTF_INCLUDE_DIRS "tiny_gltf.h")
 find_package(fmt CONFIG REQUIRED)
