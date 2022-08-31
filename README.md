@@ -26,8 +26,8 @@ These packages are required to install.
 - `vulkan-hpp`
 - `openxr-loader[vulkan]`
 
-CAUTION: Latest freealut header includes mistake.
-We recommend to fix `AL/alut.h` manually.
+**CAUTION**: Latest freealut header has a problem and this causes compile errors.
+We recommend to fix `AL/alut.h` installed by vcpkg manually.
 before:
 ```cpp
 #include <alc.h>
